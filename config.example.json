@@ -1,0 +1,16 @@
+{
+  "accounts": [
+    {
+      "phone": "13800138000",
+      "password": "your_password",
+      "name": "主账号"
+    }
+  ],
+  "wechat_push": {
+    "enabled": true,
+    "corpid": "your_corpid",
+    "corpsecret": "your_corpsecret",
+    "agentid": 1000002,
+    "touser": "@all"
+  }
+}
