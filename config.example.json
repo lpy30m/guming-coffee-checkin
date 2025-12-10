@@ -15,11 +15,9 @@
       "unionId": "hdzy_gmkjjt_aeuyur="
     }
   },
-  "wechat_push": {
+  "push": {
     "enabled": true,
-    "corpid": "your_corpid",
-    "corpsecret": "your_corpsecret",
-    "agentid": 1000002,
-    "touser": "@all"
+    "sendkeys": "your_sendkey_here",
+    "sendkey": "SCT180951To4EcN6OqZuobAmRvtLFJqdbU"
   }
 }

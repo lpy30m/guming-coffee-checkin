@@ -10,7 +10,7 @@ import sys
 import os
 from datetime import datetime
 from checkin import GumingCheckin
-from wechat_pusher import WechatPusher
+from server_pusher import ServerPusher
 
 
 def load_config(config_path='config.json'):
@@ -65,20 +65,19 @@ def main():
         print("❌ 未配置 Cookie 信息！")
         sys.exit(1)
     
-    # 初始化微信推送器
-    wechat_pusher = None
-    if wechat_config.get('enabled', True):
+    # 初始化推送器
+    pusher = None
+    push_config = config.get('push', {})
+    
+    if push_config.get('enabled', True):
         try:
-            wechat_pusher = WechatPusher(
-                corpid=wechat_config.get('corpid'),
-                corpsecret=wechat_config.get('corpsecret'),
-                agentid=wechat_config.get('agentid'),
-                touser=wechat_config.get('touser', '@all')
+            pusher = ServerPusher(
+                sendkey=push_config.get('sendkey', '')
             )
-            print("✅ 微信推送模块已启用")
+            print("✅ Server 酱推送模块已启用")
         except Exception as e:
-            print(f"⚠️  微信推送模块初始化失败: {e}")
-            wechat_pusher = None
+            print(f"⚠️  推送模块初始化失败: {e}")
+            pusher = None
     
     print()
     
@@ -96,8 +95,8 @@ def main():
     result = checkin.run()
     
     # 发送通知
-    if wechat_pusher and result:
-        send_notification(wechat_pusher, account_name, result)
+    if pusher and result:
+        send_notification(pusher, account_name, result)
     
     print("\n" + "=" * 60)
     if result.get('success'):
@@ -108,13 +107,13 @@ def main():
 
 
 def send_notification(pusher, account_name, result):
-    """发送微信通知"""
+    """发送推送通知"""
     success = result.get('success', False)
     message = result.get('message', '未知状态')
     
     # 构建消息内容
     status = "✅ 成功" if success else "❌ 失败"
-    title = f"🎉 古茗签到结果通知"
+    title = f"古茗签到结果通知"
     
     content_lines = [
         f"📊 签到状态: {status}",
@@ -132,10 +131,10 @@ def send_notification(pusher, account_name, result):
     
     # 发送推送
     try:
-        pusher.send_text_message(title, content)
-        print("\n✅ 微信推送发送成功！")
+        pusher.send(title, content)
+        print("\n✅ 推送发送成功！")
     except Exception as e:
-        print(f"\n⚠️  微信推送发送失败: {e}")
+        print(f"\n⚠️  推送发送失败: {e}")
 
 
 if __name__ == '__main__':

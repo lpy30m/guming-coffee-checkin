@@ -48,7 +48,7 @@ class GumingCheckin:
             f"appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&"
             f"activityPlanId=44993818764&applicationId=11&"
             f"li={li}&hi=xmps&channelType=1050&platformEnv=4&"
-            f"devVersion=DV100&idxgy=89n08qvl&eoq={eoq}"
+            f"devVersion=DV100&ujdnf=7omaga1t&sbs={eoq}"
         )
         
         # 设置基础请求头

@@ -61,9 +61,9 @@ cp config.example.json config.json
     }
   },
   "wechat_push": {
-    "corpid": "企业微信 CorpID",
-    "corpsecret": "企业微信 CorpSecret",
-    "agentid": "应用 AgentID",
+    "corpid": "您的企业微信 CorpID",
+    "corpsecret": "您的企业微信 CorpSecret",
+    "agentid": 您的应用 AgentID,
     "touser": "@all"
   }
 }
