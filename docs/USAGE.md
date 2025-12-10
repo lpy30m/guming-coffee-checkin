@@ -202,9 +202,9 @@ A: 当前版本仅支持单账户签到。多账户支持将在后续版本中�
 
 A: 可以。如果使用 GitHub Actions，可以修改 `.github/workflows/checkin.yml` 中的 cron 表达式。
 
-### Q5: 微信推送是必须的吗？
+### **Q5: 推送是必须的吗？**
 
-A: 不是。如果不需要微信推送，可以在 `config.json` 中设置 `"enabled": false`。
+A: 不是。如果不需要推送，可以在 `config.json` 中设置 `"enabled": false`。
 
 ## 自动化签到（GitHub Actions）
 

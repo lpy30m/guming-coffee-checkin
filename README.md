@@ -61,11 +61,9 @@ cp config.example.json config.json
       "unionId": "hdzy_gmkjjt_aeuyur="
     }
   },
-  "wechat_push": {
-    "corpid": "您的企业微信 CorpID",
-    "corpsecret": "您的企业微信 CorpSecret",
-    "agentid": 您的应用 AgentID,
-    "touser": "@all"
+  "push": {
+    "enabled": true,
+    "sendkey": "您的 Server 酱 SendKey"
   }
 }
 ```
@@ -82,7 +80,7 @@ python main.py
 > **非常重要**：`host`、`li`、`idxgy` 和 `eoq` 这四个参数**每个账户都不同**，必须从同一个活动链接中成套提取，否则签到会失败！
 
 > [!NOTE]
-> 这些参数在微信小程序中通过云函数生成，每次打开活动页面时可能会变化。如果签到失败提示"页面已变化"，请重新获取最新的参数。
+> 这些参数可能在微信小程序中通过云函数生成，每次打开活动页面时可能会变化。如果签到失败提示"页面已变化"，请重新获取最新的参数。
 
 ### 获取 host 参数
 

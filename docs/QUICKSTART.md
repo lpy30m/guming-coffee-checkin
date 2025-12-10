@@ -27,12 +27,9 @@
 - `checkin_url`：签到 API 地址
 - 请求参数格式（根据实际抓包结果调整）
 
-### 1.2 配置企业微信（可选但推荐）
+### 1.2 配置 Server 酱（可选但推荐）
 
-参考 [企业微信配置教程](docs/wechat-setup.md) 获取：
-- `corpid`
-- `corpsecret`
-- `agentid`
+参考 [Server 酱配置教程](docs/server-setup.md) 获取 SendKey。
 
 ## 🎯 步骤 2: 本地配置
 
@@ -59,12 +56,9 @@ cp config.example.json config.json
       "name": "主账号"
     }
   ],
-  "wechat_push": {
+  "push": {
     "enabled": true,
-    "corpid": "您的企业微信 CorpID",
-    "corpsecret": "您的企业微信 CorpSecret",
-    "agentid": 1000002,
-    "touser": "@all"
+    "sendkey": "your_sendkey_here"
   }
 }
 ```
@@ -201,13 +195,13 @@ schedule:
 
 ### 问题 3: 微信推送失败
 
-- 参考 [企业微信配置教程](docs/wechat-setup.md)
+- 参考 [Server 酱配置教程](docs/server-setup.md)
 - 确认三个参数填写正确
 - 测试 access_token 是否能正常获取
 
 ## 📚 更多文档
 
-- [企业微信配置教程](docs/wechat-setup.md)
+- [Server 酱配置教程](docs/server-setup.md)
 - [README.md](README.md)
 
 ---
