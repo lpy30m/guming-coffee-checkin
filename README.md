@@ -155,12 +155,7 @@ channelType=1050&platformEnv=4&devVersion=DV100&idxgy=89n08qvl&eoq=0dzibt7pk983
 
 ## 微信推送配置
 
-本项目使用企业微信应用消息推送，您需要：
-
-1. 注册企业微信（免费）：https://work.weixin.qq.com/
-2. 创建应用获取 `CorpID`、`CorpSecret` 和 `AgentID`
-
-详细教程请参考：[企业微信应用消息推送配置教程](docs/wechat-setup.md)
+本项目使用 [Server酱消息推送](https://sct.ftqq.com/)，您只需要简单访问文档，在`config.json`中配置您的`sendkey`既可
 
 ## GitHub Actions 自动化
 
@@ -182,7 +177,7 @@ channelType=1050&platformEnv=4&devVersion=DV100&idxgy=89n08qvl&eoq=0dzibt7pk983
 .
 ├── main.py                 # 主程序入口
 ├── checkin.py             # 签到核心逻辑
-├── wechat_pusher.py       # 微信推送模块
+├── server_pusher.py       # 微信推送模块
 ├── config.example.json    # 配置文件示例
 ├── config.json            # 配置文件（需自行创建）
 ├── requirements.txt       # Python 依赖
@@ -210,7 +205,7 @@ A: 日志会输出到控制台，您也可以在 GitHub Actions 的运行记录�
 A: 可以，在 `config.json` 的 `accounts` 数组中添加多个账户信息即可。
 
 ### Q: 微信推送失败怎么办？
-A: 请检查企业微信配置是否正确，确保 CorpID、CorpSecret 和 AgentID 填写无误。
+A: 请检查Server酱配置是否正确，确保 sendkey 填写无误。
 
 ## 开发计划
 

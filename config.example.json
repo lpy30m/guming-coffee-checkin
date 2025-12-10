@@ -18,7 +18,6 @@
   },
   "push": {
     "enabled": true,
-    "sendkeys": "your_sendkey_here",
-    "sendkey": "SCT180951To4EcN6OqZuobAmRvtLFJqdbU"
+    "sendkey": "your_sendkey_here"
   }
 }
