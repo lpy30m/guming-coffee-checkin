@@ -172,7 +172,7 @@ channelType=1050&platformEnv=4&devVersion=DV100&idxgy=89n08qvl&eoq=0dzibt7pk983
 脚本将在每天早上 8:00 (UTC+8) 自动运行。
 
 ## 项目结构
-
+docs的文档均为谷歌反重力自动生成，如遇到问题，可在issue中提出。
 ```
 .
 ├── main.py                 # 主程序入口
