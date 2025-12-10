@@ -11,11 +11,13 @@ Guming Coffee New Year Check-in Plan - 自动签到脚本，支持微信推送�
 
 ## 功能特性
 
-- ✅ 自动完成每日签到
+- ✅ 自动完成每日签到（三步签到流程）
 - 📱 签到成功后微信推送通知
 - ⏰ 支持定时任务（配合 GitHub Actions 或 Cron）
 - 🔐 安全的配置文件管理
 - 📊 签到日志记录
+
+> **注意**：当前版本仅支持单账户签到
 
 ## 快速开始
 
@@ -42,13 +44,21 @@ cp config.example.json config.json
 
 ```json
 {
-  "accounts": [
-    {
-      "phone": "您的手机号",
-      "password": "您的密码",
-      "name": "账户备注名"
+  "account": {
+    "name": "账户备注名",
+    "li": "从活动链接中提取的 li 参数",
+    "eoq": "从活动链接中提取的 eoq 参数",
+    "cookies": {
+      "loginTime": "hdzy_gmkjjt_aeuyur=...",
+      "userId": "hdzy_gmkjjt_aeuyur=...",
+      "ls": "hdzy_gmkjjt_aeuyur=...",
+      "appKey": "hdzy_gmkjjt_aeuyur",
+      "consumerId": "hdzy_gmkjjt_aeuyur=...",
+      "placeId": "hdzy_gmkjjt_aeuyur=6071861865300",
+      "openId": "hdzy_gmkjjt_aeuyur=...",
+      "unionId": "hdzy_gmkjjt_aeuyur="
     }
-  ],
+  },
   "wechat_push": {
     "corpid": "企业微信 CorpID",
     "corpsecret": "企业微信 CorpSecret",
@@ -63,6 +73,48 @@ cp config.example.json config.json
 ```bash
 python main.py
 ```
+
+## 参数获取方法
+
+### 获取 li 和 eoq 参数
+
+1. 打开古茗小程序活动页面
+2. 查看完整的活动链接 URL
+3. 从 URL 中提取参数：
+   - `li=xxx` - 提取 xxx 部分
+   - `eoq=xxx` - 提取 xxx 部分
+
+**示例 URL**：
+```
+https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/activityMultiport.html?
+appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&activityPlanId=44993818764&
+applicationId=11&li=0132541916176534842173159328666627901045&hi=xmps&
+channelType=1050&platformEnv=4&devVersion=DV100&eoq=0dzibt7pk983
+```
+
+从上述 URL 中：
+- `li` = `0132541916176534842173159328666627901045`
+- `eoq` = `0dzibt7pk983`
+
+### 获取 Cookie
+
+## Cookie 获取方法
+
+### 方法一：抓包工具（推荐）
+
+1. 使用抓包工具（Charles、HttpCanary 等）
+2. 打开古茗 App 并登录
+3. 在请求中找到 Cookie 字段
+4. 复制所需的 Cookie 值到配置文件
+
+### 方法二：浏览器开发者工具
+
+1. 在浏览器中打开古茗活动页面并登录
+2. 按 F12 打开开发者工具
+3. 切换到 Application/存储 标签
+4. 查看 Cookies 并复制所需值
+
+**重要提示**：Cookie 有效期有限，失效后需要重新获取。
 
 ## 微信推送配置
 

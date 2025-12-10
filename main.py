@@ -29,19 +29,33 @@ def load_config(config_path='config.json'):
 
 def main():
     """主函数"""
-    print("=" * 50)
+    print("=" * 60)
     print("🎉 古茗咖啡新年签到计划 🎉")
-    print("=" * 50)
+    print("=" * 60)
     print(f"⏰ 执行时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
     
     # 加载配置
     config = load_config()
-    accounts = config.get('accounts', [])
+    account = config.get('account', {})
     wechat_config = config.get('wechat_push', {})
     
-    if not accounts:
-        print("❌ 未配置任何账户！")
+    if not account:
+        print("❌ 未配置账户信息！")
+        sys.exit(1)
+    
+    # 验证必需参数
+    li = account.get('li')
+    eoq = account.get('eoq')
+    cookies = account.get('cookies', {})
+    
+    if not li or not eoq:
+        print("❌ 配置文件缺少 li 或 eoq 参数！")
+        print("请检查 config.json 中的 account.li 和 account.eoq 配置")
+        sys.exit(1)
+    
+    if not cookies:
+        print("❌ 未配置 Cookie 信息！")
         sys.exit(1)
     
     # 初始化微信推送器
@@ -59,51 +73,52 @@ def main():
             print(f"⚠️  微信推送模块初始化失败: {e}")
             wechat_pusher = None
     
+    print()
+    
     # 执行签到
-    results = []
-    for idx, account in enumerate(accounts, 1):
-        print(f"\n--- 账户 {idx}/{len(accounts)}: {account.get('name', '未命名')} ---")
-        
-        checkin = GumingCheckin(
-            phone=account.get('phone'),
-            password=account.get('password')
-        )
-        
-        result = checkin.run()
-        results.append({
-            'account': account.get('name', account.get('phone')),
-            'result': result
-        })
+    account_name = account.get('name', '未命名')
     
-    # 发送汇总通知
-    if wechat_pusher:
-        send_summary_notification(wechat_pusher, results)
+    checkin = GumingCheckin(
+        li=li,
+        eoq=eoq,
+        cookies=cookies,
+        name=account_name
+    )
     
-    print("\n" + "=" * 50)
-    print("✨ 所有任务执行完成！")
-    print("=" * 50)
+    result = checkin.run()
+    
+    # 发送通知
+    if wechat_pusher and result:
+        send_notification(wechat_pusher, account_name, result)
+    
+    print("\n" + "=" * 60)
+    if result.get('success'):
+        print("✨ 签到完成！")
+    else:
+        print("⚠️  签到未成功，请查看上方日志")
+    print("=" * 60)
 
 
-def send_summary_notification(pusher, results):
-    """发送汇总通知"""
-    success_count = sum(1 for r in results if r['result']['success'])
-    total_count = len(results)
+def send_notification(pusher, account_name, result):
+    """发送微信通知"""
+    success = result.get('success', False)
+    message = result.get('message', '未知状态')
     
     # 构建消息内容
-    title = "🎉 古茗签到结果通知"
+    status = "✅ 成功" if success else "❌ 失败"
+    title = f"🎉 古茗签到结果通知"
     
     content_lines = [
-        f"📊 签到统计: {success_count}/{total_count} 成功",
+        f"📊 签到状态: {status}",
+        f"👤 账户: {account_name}",
         f"⏰ 时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         "",
-        "详细结果:"
+        f"💬 结果: {message}"
     ]
     
-    for item in results:
-        status = "✅" if item['result']['success'] else "❌"
-        account = item['account']
-        message = item['result']['message']
-        content_lines.append(f"{status} {account}: {message}")
+    # 如果有额外信息
+    if result.get('date'):
+        content_lines.append(f"📅 签到日期: {result.get('date')}")
     
     content = "\n".join(content_lines)
     

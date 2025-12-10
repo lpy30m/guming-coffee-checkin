@@ -1,11 +1,19 @@
 {
-  "accounts": [
-    {
-      "phone": "13800138000",
-      "password": "your_password",
-      "name": "主账号"
+  "account": {
+    "name": "主账号",
+    "li": "0132541916176534842173159328666627901045",
+    "eoq": "0dzibt7pk983",
+    "cookies": {
+      "loginTime": "hdzy_gmkjjt_aeuyur=1765333388302",
+      "userId": "hdzy_gmkjjt_aeuyur=8042474550720305503",
+      "ls": "hdzy_gmkjjt_aeuyur=3792248922176533338802059328666694930560-1",
+      "appKey": "hdzy_gmkjjt_aeuyur",
+      "consumerId": "hdzy_gmkjjt_aeuyur=2000000000602009457",
+      "placeId": "hdzy_gmkjjt_aeuyur=6071861865300",
+      "openId": "hdzy_gmkjjt_aeuyur=2000000000602009457",
+      "unionId": "hdzy_gmkjjt_aeuyur="
     }
-  ],
+  },
   "wechat_push": {
     "enabled": true,
     "corpid": "your_corpid",
