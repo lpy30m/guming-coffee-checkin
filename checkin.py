@@ -22,7 +22,7 @@ class GumingCheckin:
     SECRET_KEY = "uh3$Hg&^HK876%gbxVG7f$%p=0M~>s1x"
     TOKEN_SECRET = "J7h8&^Bgs5#bn*7hn%!=kh308*bv2!s^"
     
-    def __init__(self, host, li, eoq, cookies, name="未命名"):
+    def __init__(self, host, li, eoq, idxgy, cookies, name="未命名"):
         """
         初始化签到客户端
         
@@ -48,7 +48,7 @@ class GumingCheckin:
             f"appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&"
             f"activityPlanId=44993818764&applicationId=11&"
             f"li={li}&hi=xmps&channelType=1050&platformEnv=4&"
-            f"devVersion=DV100&ujdnf=7omaga1t&sbs={eoq}"
+            f"devVersion=DV100&idxgy={idxgy}&eoq={eoq}"
         )
         
         # 设置基础请求头

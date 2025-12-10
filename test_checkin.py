@@ -29,6 +29,7 @@ def test_checkin():
     host = account.get('host')
     li = account.get('li')
     eoq = account.get('eoq')
+    idxgy = account.get('idxgy')
     cookies = account.get('cookies', {})
     name = account.get('name', '测试账号')
     
@@ -61,6 +62,7 @@ def test_checkin():
         host=host,
         li=li,
         eoq=eoq,
+        idxgy=idxgy,
         cookies=cookies,
         name=name
     )

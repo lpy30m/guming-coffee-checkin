@@ -22,7 +22,9 @@ cp config.example.json config.json
 {
   "account": {
     "name": "我的账号",
+    "host": "您的host参数",
     "li": "您的li参数",
+    "idxgy": "您的idxgy参数",
     "eoq": "您的eoq参数",
     "cookies": {
       "loginTime": "hdzy_gmkjjt_aeuyur=...",
@@ -37,6 +39,10 @@ cp config.example.json config.json
   }
 }
 ```
+
+> [!WARNING]
+> **重要**：`host`、`li`、`idxgy`、`eoq` 这四个参数必须从同一个 URL 中成套提取！  
+> 详细请看：[docs/PARAMETERS.md](PARAMETERS.md)
 
 ### 3. 运行签到
 

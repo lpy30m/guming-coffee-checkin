@@ -49,6 +49,7 @@ def main():
     li = account.get('li')
     eoq = account.get('eoq')
     cookies = account.get('cookies', {})
+    idxgy = account.get('idxgy')
     
     if not host:
         print("❌ 配置文件缺少 host 参数！")
@@ -88,6 +89,7 @@ def main():
         host=host,
         li=li,
         eoq=eoq,
+        idxgy=idxgy,
         cookies=cookies,
         name=account_name
     )
