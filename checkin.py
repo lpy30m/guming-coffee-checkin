@@ -22,24 +22,27 @@ class GumingCheckin:
     SECRET_KEY = "uh3$Hg&^HK876%gbxVG7f$%p=0M~>s1x"
     TOKEN_SECRET = "J7h8&^Bgs5#bn*7hn%!=kh308*bv2!s^"
     
-    def __init__(self, host, li, eoq, idxgy, cookies, name="未命名"):
+    def __init__(self, host, li, url_params, cookies, name="未命名"):
         """
         初始化签到客户端
         
         Args:
             host: 请求域名（如: p60718618653004equ-saas.yl-activity.meta-xuantan.com）
             li: 活动链接参数 li
-            eoq: 活动链接参数 eoq
+            url_params: URL 参数字典（如: {"idxgy": "xxx", "eoq": "xxx"} 或 {"ujdnf": "xxx", "sbs": "xxx"}）
             cookies: Cookie 字典
             name: 账户备注名
         """
         self.host = host
         self.li = li
-        self.eoq = eoq
+        self.url_params = url_params
         self.cookies = cookies
         self.name = name
         self.session = requests.Session()
         self.xm_token = None
+        
+        # 构建 URL 参数字符串
+        extra_params = "&".join([f"{k}={v}" for k, v in url_params.items()])
         
         # 构建页面URL
         self.page_url = (
@@ -48,7 +51,7 @@ class GumingCheckin:
             f"appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&"
             f"activityPlanId=44993818764&applicationId=11&"
             f"li={li}&hi=xmps&channelType=1050&platformEnv=4&"
-            f"devVersion=DV100&idxgy={idxgy}&eoq={eoq}"
+            f"devVersion=DV100&{extra_params}"
         )
         
         # 设置基础请求头

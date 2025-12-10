@@ -28,8 +28,7 @@ def test_checkin():
     # 验证配置
     host = account.get('host')
     li = account.get('li')
-    eoq = account.get('eoq')
-    idxgy = account.get('idxgy')
+    url_params = account.get('url_params', {})
     cookies = account.get('cookies', {})
     name = account.get('name', '测试账号')
     
@@ -41,8 +40,8 @@ def test_checkin():
         print("❌ 配置文件缺少 li 参数")
         return
     
-    if not eoq:
-        print("❌ 配置文件缺少 eoq 参数")
+    if not url_params:
+        print("❌ 配置文件缺少 url_params 参数")
         return
     
     if not cookies:
@@ -53,7 +52,7 @@ def test_checkin():
     print(f"  - 账户名称: {name}")
     print(f"  - Host: {host}")
     print(f"  - li 参数: {li[:20]}...")
-    print(f"  - eoq 参数: {eoq}")
+    print(f"  - URL 参数: {url_params}")
     print(f"  - Cookie 字段数: {len(cookies)}")
     print()
     
@@ -61,8 +60,7 @@ def test_checkin():
     checkin = GumingCheckin(
         host=host,
         li=li,
-        eoq=eoq,
-        idxgy=idxgy,
+        url_params=url_params,
         cookies=cookies,
         name=name
     )

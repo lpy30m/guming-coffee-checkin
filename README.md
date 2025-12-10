@@ -48,8 +48,10 @@ cp config.example.json config.json
     "name": "账户备注名",
     "host": "p60718618653004equ-saas.yl-activity.meta-xuantan.com",
     "li": "从活动链接中提取的 li 参数",
-    "idxgy": "从活动链接中提取的 idxgy 参数",
-    "eoq": "从活动链接中提取的 eoq 参数",
+    "url_params": {
+      "idxgy": "从活动链接中提取的参数值",
+      "eoq": "从活动链接中提取的参数值"
+    },
     "cookies": {
       "loginTime": "hdzy_gmkjjt_aeuyur=...",
       "userId": "hdzy_gmkjjt_aeuyur=...",
@@ -77,7 +79,7 @@ python main.py
 ## 参数获取方法
 
 > [!WARNING]
-> **非常重要**：`host`、`li`、`idxgy` 和 `eoq` 这四个参数**每个账户都不同**，必须从同一个活动链接中成套提取，否则签到会失败！
+> **非常重要**：`host`、`li` 和 `url_params` 中的所有参数必须从同一个活动链接中成套提取，否则签到会失败！
 
 > [!NOTE]
 > 这些参数可能在微信小程序中通过云函数生成，每次打开活动页面时可能会变化。如果签到失败提示"页面已变化"，请重新获取最新的参数。
@@ -96,30 +98,41 @@ https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/activityMultiport.h
 
 > **注意**：不同用户的 host 可能不同，请根据您实际的活动链接填写。
 
-### 获取 li、idxgy 和 eoq 参数
+### 获取 li 和 url_params 参数
 
 > [!IMPORTANT]
-> 这三个参数必须从**同一个** URL 中一起提取，不能混用不同链接的参数！
-
-**注意**：你得到的 URL 参数名称可能不是 `li`、`idxgy`、`eoq`，但位置和格式是一样的。
+> URL 中的参数名称可能不固定（如 `idxgy`/`ujdnf`、`eoq`/`sbs` 等），请根据实际 URL 配置！
 
 1. 打开古茗小程序活动页面
 2. 使用抓包工具（Charles、HttpCanary 等）查看完整的活动链接 URL
 3. 从 URL 中成套提取参数
 
-**示例 URL**：
+**示例 URL 1**：
 ```
 https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/activityMultiport.html?
 appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&activityPlanId=44993818764&
 applicationId=11&li=0132541916176534842173159328666627901045&hi=xmps&
 channelType=1050&platformEnv=4&devVersion=DV100&idxgy=89n08qvl&eoq=0dzibt7pk983
 ```
+在checkin.py中 主要对比是你的self.page_url,可能你获取到的链接中,不一定是idxgy 和 eoq，可能需要手动更改了。
 
 从上述 URL 中提取：
 - `host` = `p60718618653004equ-saas.yl-activity.meta-xuantan.com`
 - `li` = `0132541916176534842173159328666627901045`
-- `idxgy` = `89n08qvl`
-- `eoq` = `0dzibt7pk983`
+- `url_params` = `{"idxgy": "89n08qvl", "eoq": "0dzibt7pk983"}`
+
+**示例 URL 2** (不同的参数名):
+```
+https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/activityMultiport.html?
+appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&
+li=3792248922176533338802059328666694930560&
+ujdnf=7omaga1t&sbs=qn6tg1nsvoh0
+```
+
+从上述 URL 中提取：
+- `host` = `p60718618653004equ-saas.yl-activity.meta-xuantan.com`
+- `li` = `3792248922176533338802059328666694930560`
+- `url_params` = `{"ujdnf": "7omaga1t", "sbs": "qn6tg1nsvoh0"}`
 
 **配置到 config.json**：
 ```json
@@ -127,11 +140,16 @@ channelType=1050&platformEnv=4&devVersion=DV100&idxgy=89n08qvl&eoq=0dzibt7pk983
   "account": {
     "host": "p60718618653004equ-saas.yl-activity.meta-xuantan.com",
     "li": "0132541916176534842173159328666627901045",
-    "idxgy": "89n08qvl",
-    "eoq": "0dzibt7pk983"
+    "url_params": {
+      "idxgy": "89n08qvl",
+      "eoq": "0dzibt7pk983"
+    }
   }
 }
 ```
+
+> [!TIP]
+> 详细的参数配置说明请查看：[docs/URL_PARAMS.md](docs/URL_PARAMS.md)
 
 ### 获取 Cookie
 

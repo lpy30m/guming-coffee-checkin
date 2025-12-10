@@ -3,8 +3,10 @@
     "name": "主账号",
     "host": "p60718618653004equ-saas.yl-activity.meta-xuantan.com",
     "li": "0132541916176534842173159328666627901045",
-    "idxgy": "89n08qvl",
-    "eoq": "0dzibt7pk983",
+    "url_params": {
+      "idxgy": "89n08qvl",
+      "eoq": "0dzibt7pk983"
+    },
     "cookies": {
       "loginTime": "hdzy_gmkjjt_aeuyur=1765333388302",
       "userId": "hdzy_gmkjjt_aeuyur=8042474550720305503",
