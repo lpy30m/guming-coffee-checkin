@@ -26,10 +26,15 @@ def test_checkin():
     account = config.get('account', {})
     
     # 验证配置
+    host = account.get('host')
     li = account.get('li')
     eoq = account.get('eoq')
     cookies = account.get('cookies', {})
     name = account.get('name', '测试账号')
+    
+    if not host:
+        print("❌ 配置文件缺少 host 参数")
+        return
     
     if not li:
         print("❌ 配置文件缺少 li 参数")
@@ -45,6 +50,7 @@ def test_checkin():
     
     print(f"📋 配置检查:")
     print(f"  - 账户名称: {name}")
+    print(f"  - Host: {host}")
     print(f"  - li 参数: {li[:20]}...")
     print(f"  - eoq 参数: {eoq}")
     print(f"  - Cookie 字段数: {len(cookies)}")
@@ -52,6 +58,7 @@ def test_checkin():
     
     # 创建签到实例
     checkin = GumingCheckin(
+        host=host,
         li=li,
         eoq=eoq,
         cookies=cookies,

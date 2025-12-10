@@ -45,9 +45,16 @@ def main():
         sys.exit(1)
     
     # 验证必需参数
+    host = account.get('host')
     li = account.get('li')
     eoq = account.get('eoq')
     cookies = account.get('cookies', {})
+    
+    if not host:
+        print("❌ 配置文件缺少 host 参数！")
+        print("请检查 config.json 中的 account.host 配置")
+        print("示例: p60718618653004equ-saas.yl-activity.meta-xuantan.com")
+        sys.exit(1)
     
     if not li or not eoq:
         print("❌ 配置文件缺少 li 或 eoq 参数！")
@@ -79,6 +86,7 @@ def main():
     account_name = account.get('name', '未命名')
     
     checkin = GumingCheckin(
+        host=host,
         li=li,
         eoq=eoq,
         cookies=cookies,

@@ -46,6 +46,7 @@ cp config.example.json config.json
 {
   "account": {
     "name": "账户备注名",
+    "host": "p60718618653004equ-saas.yl-activity.meta-xuantan.com",
     "li": "从活动链接中提取的 li 参数",
     "eoq": "从活动链接中提取的 eoq 参数",
     "cookies": {
@@ -75,6 +76,20 @@ python main.py
 ```
 
 ## 参数获取方法
+
+### 获取 host 参数
+
+`host` 是活动页面的域名，从完整的活动链接 URL 中提取。
+
+**示例 URL**：
+```
+https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/activityMultiport.html?...
+```
+
+提取域名部分：
+- `host` = `p60718618653004equ-saas.yl-activity.meta-xuantan.com`
+
+> **注意**：不同用户的 host 可能不同，请根据您实际的活动链接填写。
 
 ### 获取 li 和 eoq 参数
 

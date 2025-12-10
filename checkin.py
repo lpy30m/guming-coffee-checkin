@@ -22,16 +22,18 @@ class GumingCheckin:
     SECRET_KEY = "uh3$Hg&^HK876%gbxVG7f$%p=0M~>s1x"
     TOKEN_SECRET = "J7h8&^Bgs5#bn*7hn%!=kh308*bv2!s^"
     
-    def __init__(self, li, eoq, cookies, name="未命名"):
+    def __init__(self, host, li, eoq, cookies, name="未命名"):
         """
         初始化签到客户端
         
         Args:
+            host: 请求域名（如: p60718618653004equ-saas.yl-activity.meta-xuantan.com）
             li: 活动链接参数 li
             eoq: 活动链接参数 eoq
             cookies: Cookie 字典
             name: 账户备注名
         """
+        self.host = host
         self.li = li
         self.eoq = eoq
         self.cookies = cookies
@@ -41,7 +43,7 @@ class GumingCheckin:
         
         # 构建页面URL
         self.page_url = (
-            f"https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/"
+            f"https://{host}/"
             f"activityMultiport.html?"
             f"appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&"
             f"activityPlanId=44993818764&applicationId=11&"
@@ -192,7 +194,7 @@ class GumingCheckin:
         """
         print(f"📝 步骤1: 获取基础参数...")
         
-        url = "https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/xm/auth/getBaseParams"
+        url = f"https://{self.host}/xm/auth/getBaseParams"
         
         xm_timestamp = str(int(time.time() * 1000))
         nonce_str = self.generate_nonce_str()
@@ -240,7 +242,7 @@ class GumingCheckin:
         """
         print(f"📝 步骤2: 获取用户 Token...")
         
-        url = "https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/xm/token/getUserToken"
+        url = f"https://{self.host}/xm/token/getUserToken"
         
         xm_timestamp = str(int(time.time() * 1000))
         nonce_str_header = self.generate_nonce_str()
@@ -264,7 +266,7 @@ class GumingCheckin:
         
         headers = {
             **self.base_headers,
-            "Host": "p6071861865300hc04-saas.yl-activity.meta-xuantan.com",
+            "Host": self.host,
             "xmSign": xm_sign,
             "xmTimestamp": xm_timestamp,
             "xmToken": "",
@@ -314,7 +316,7 @@ class GumingCheckin:
                 'message': '缺少 xmToken，无法签到'
             }
         
-        url = "https://p60718618653004equ-saas.yl-activity.meta-xuantan.com/sign/action"
+        url = f"https://{self.host}/sign/action"
         
         # 获取当前日期
         today = datetime.now().strftime('%Y-%m-%d')
