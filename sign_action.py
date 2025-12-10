@@ -120,6 +120,9 @@ print(headers)
 
 
 response = requests.post(url, headers=headers, cookies=cookies, json=json_data)
+"""
+{"code":"0","desc":"成功","data":{"todaySigned":1,"patchSigned":0,"nearSigned":null,"nearSignedDays":null,"hasStock":null,"nearPrizeList":null,"nextSignedDays":null,"nextPrizeList":null,"actionResult":{"actionAward":{"receiveStatus":0,"rewardList":[{"mnpAppId":null,"thirdMnpAppId":"wx1736dcbd36f4c055","thirdMnpMidPageImg":"https://xiaoman-oss-cdn.meta-xuantan.com/saas/weChat/xiaoman/thirdMnpMidPageImg.png","tabBarType":0,"index":0,"userPrizeId":3619961,"planPrizeId":80332,"prizeNo":"92a6u2zt","prizeName":"古茗咖啡券包","prizeTitle":"古茗咖啡券包","linkType":3,"linkUrl":"/pages/couponList/index","landPageUrL":"/pages/couponList/index","prizeSource":3,"prizeType":64,"prizeClassify":null,"level":null,"prizeClassifyName":"","prizeTip":null,"couponQuota":null,"cardCodeNo":null,"prizeDesc":"咖啡签到","beginTime":"2025-12-01 00:00:00.0","endTime":"2099-01-01 23:59:59.0","validDays":null,"prizeUseScene":null,"awardNum":1,"cover":"//xiaoman-oss-cdn.meta-xuantan.com/saas/img/1qixja2sxl.png","prizeRule":null}]},"actionPop":{"title":"恭喜获得","subTitle":"古茗咖啡券包","imgUrl":"//xiaoman-oss-cdn.meta-xuantan.com/saas/img/1qixja2sxl.png","desc":null,"buttonTxt":"立即收下","buttonText":"立即收下"},"actionId":"3AG0K83459B2CGS6","nextAction":1,"nextActionValue":null,"actionJson":null}}}
 
+"""
 print(response.text)
 print(response)

@@ -46,7 +46,7 @@ class GumingCheckin:
             f"appKey=hdzy_gmkjjt_aeuyur&placeId=6071861865300&"
             f"activityPlanId=44993818764&applicationId=11&"
             f"li={li}&hi=xmps&channelType=1050&platformEnv=4&"
-            f"devVersion=DV100&eoq={eoq}"
+            f"devVersion=DV100&idxgy=89n08qvl&eoq={eoq}"
         )
         
         # 设置基础请求头
@@ -361,7 +361,7 @@ class GumingCheckin:
                     'date': today,
                     'response': data
                 }
-            elif '已签到' in desc or '已经签到' in desc:
+            elif '重复签到' in desc or '已签到' in desc or '已经签到' in desc:
                 message = f"今日已签到"
                 print(f"ℹ️  {message}")
                 
